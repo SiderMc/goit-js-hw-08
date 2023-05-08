@@ -13,7 +13,6 @@ const onPlay = function (data) {
     localStorage.removeItem(LOCAL_KEY);
     return;
   }
-  return player.setCurrentTime(localStorage.getItem(LOCAL_KEY));
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));

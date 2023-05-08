@@ -16,16 +16,21 @@ function setLocalValue(e) {
 function getFormsValue(form) {
   if (localStorage.getItem(LOCAL_KEY)) {
     formData = JSON.parse(localStorage.getItem(LOCAL_KEY));
-    for (let key in formData) {
-      form.elements[key].value = formData[key];
-    }
+    Object.entries(formData).forEach(([key, value]) => {
+      form.elements[key].value = value;
+    });
   }
 }
 getFormsValue(form);
 
 function submitValues(e) {
   e.preventDefault();
-  console.log(formData);
-  localStorage.removeItem(LOCAL_KEY);
-  form.reset();
+  if (!form.elements.email.value || !form.elements.message.value) {
+    alert('All fields must be filled!');
+    return;
+  } else {
+    console.log(formData);
+    localStorage.removeItem(LOCAL_KEY);
+    form.reset();
+  }
 }
